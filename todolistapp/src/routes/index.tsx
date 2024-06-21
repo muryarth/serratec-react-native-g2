@@ -1,11 +1,11 @@
 import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { StackRouter } from "./StackRouter";
+import { StackNavigator } from "./StackNavigator";
 
 const Router = () => {
   return (
     <NavigationContainer>
-      <StackRouter />
+      <StackNavigator />
     </NavigationContainer>
   );
 };

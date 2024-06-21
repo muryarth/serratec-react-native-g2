@@ -1,11 +1,11 @@
 import { View, Text } from "react-native";
 
-const Home = () => {
+const Favorites = () => {
   return (
     <View>
-      <Text>Home</Text>
+      <Text>Favorites</Text>
     </View>
   );
 };
 
-export { Home };
+export { Favorites };
