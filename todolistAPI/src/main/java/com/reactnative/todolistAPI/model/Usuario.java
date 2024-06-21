@@ -16,8 +16,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "login")
-public class Login {
+@Table(name = "usuario")
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +39,11 @@ public class Login {
 	@Temporal(TemporalType.DATE)
 	private LocalDate dataCriacao;
 
-	public Login() {
+	public Usuario() {
 
 	}
 
-	public Login(Long id, String username, String password, LocalDate dataCriacao) {
+	public Usuario(Long id, String username, String password, LocalDate dataCriacao) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -96,7 +96,7 @@ public class Login {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Login other = (Login) obj;
+		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id) && Objects.equals(username, other.username);
 	}
 }

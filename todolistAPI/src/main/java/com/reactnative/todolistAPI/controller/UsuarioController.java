@@ -10,41 +10,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.reactnative.todolistAPI.model.Login;
-import com.reactnative.todolistAPI.repository.LoginRepository;
-import com.reactnative.todolistAPI.service.LoginService;
+import com.reactnative.todolistAPI.model.Usuario;
+import com.reactnative.todolistAPI.repository.UsuarioRepository;
+import com.reactnative.todolistAPI.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class UsuarioController {
 
 	@Autowired
-	private LoginService loginService;
+	private UsuarioService usuarioService;
 
 	@Autowired
-	private LoginRepository loginRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@PostMapping
-	public ResponseEntity<String> login(@RequestBody Login login) {
-		String valid = loginService.verifyLogin(login);
+	public ResponseEntity<String> login(@RequestBody Usuario usuario) {
+		String valid = usuarioService.verifyLogin(usuario);
 		if (valid != null) {
 			return ResponseEntity.ok(valid);
 		} else {
-			System.out.println("Cadastro não encontrado: " + login.getUsername());
+			System.out.println("Cadastro não encontrado: " + usuario.getUsername());
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha invalidos!");
 		}
 	}
 
 	@PostMapping("/cadastrar")
-	public ResponseEntity<String> cadastrar(@Valid @RequestBody Login login) {
-		Optional<Login> loginBd = loginRepository.findByUsername(login.getUsername());
+	public ResponseEntity<String> cadastrar(@Valid @RequestBody Usuario usuario) {
+		Optional<Usuario> loginBd = usuarioRepository.findByUsername(usuario.getUsername());
 		if (loginBd.isPresent()) {
 			return ResponseEntity.badRequest().body("Email já cadastrado!");
 		}
 
-		loginService.insert(login);
+		usuarioService.insert(usuario);
 		return ResponseEntity.ok("Cadastrado com sucesso!");
 	}
 }
