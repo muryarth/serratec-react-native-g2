@@ -11,8 +11,8 @@ const StackNavigator = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={DrawerNavigator} />
+      <Stack.Screen name="StackLogin" component={Login} />
+      <Stack.Screen name="StackHome" component={DrawerNavigator} />
     </Stack.Navigator>
   );
 };

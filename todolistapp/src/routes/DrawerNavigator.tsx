@@ -1,16 +1,26 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Home } from "../pages/Home";
-import { CardCreator } from "../pages/CardCreator";
 import { Favorites } from "../pages/Favorites";
+import { TabNavigator } from "./TabNavigator";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="CardCreator" component={CardCreator} />
-      <Drawer.Screen name="Favorites" component={Favorites} />
+      <Drawer.Screen
+        options={{
+          title: "Lembretes",
+        }}
+        name="DrawerHome"
+        component={TabNavigator}
+      />
+      <Drawer.Screen
+        options={{
+          title: "Favoritos",
+        }}
+        name="DrawerCardCreator"
+        component={Favorites}
+      />
     </Drawer.Navigator>
   );
 };
