@@ -3,18 +3,18 @@ import { styles } from "./style";
 
 interface ButtonProps {
   titulo: string;
-  customOnPress: () => void;
-  tamanho?: number;
-  largura?: number | string;
+  customOnPress?: () => void;
+  color?: string;
 }
 
 const DefaultAppButton = ({
   titulo,
   customOnPress,
+  color = "#ccc",
 }: ButtonProps) => {
   return (
     <TouchableOpacity
-      style={styles.defaultAppButton}
+      style={[styles.defaultAppButton, {backgroundColor: color}]}
       onPress={customOnPress}
     >
       <Text>{titulo}</Text>

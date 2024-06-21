@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Alinha verticalmente
     height: 40,
     borderRadius: 50,
-    marginVertical: 5
+    marginVertical: 5,
+    borderWidth: 1,
+    borderColor: "#919191"
   },
 });
 
