@@ -2,7 +2,7 @@
 
 Projeto de grupo da disciplina de React Native no Serratec. Para este projeto, decidimos criar um aplicativo onde seja possível criar cards com lembretes.
 
-# Inicializando o repositório
+# Iniciando o projeto
 
 Para iniciar o reposítorio após clonar o projeto, deve-se seguir os seguintes passos:
 
