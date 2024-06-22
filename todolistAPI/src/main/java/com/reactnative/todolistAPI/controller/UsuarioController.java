@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reactnative.todolistAPI.dto.LoginDTO;
 import com.reactnative.todolistAPI.model.Usuario;
 import com.reactnative.todolistAPI.repository.UsuarioRepository;
 import com.reactnative.todolistAPI.service.UsuarioService;
@@ -27,13 +28,13 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 
 	@PostMapping
-	public ResponseEntity<String> login(@RequestBody Usuario usuario) {
-		String valid = usuarioService.verifyLogin(usuario);
-		if (valid != null) {
-			return ResponseEntity.ok(valid);
+	public ResponseEntity<LoginDTO> login(@RequestBody Usuario usuario) {
+		LoginDTO loginDTO = usuarioService.verifyLogin(usuario);
+		if (loginDTO != null) {
+			return ResponseEntity.ok(loginDTO);
 		} else {
 			System.out.println("Cadastro não encontrado: " + usuario.getUsername());
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou senha invalidos!");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 		}
 	}
 

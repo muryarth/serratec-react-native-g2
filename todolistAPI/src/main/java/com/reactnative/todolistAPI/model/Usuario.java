@@ -1,14 +1,19 @@
 package com.reactnative.todolistAPI.model;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -16,11 +21,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuarios")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	@Schema(description = "Identificador unico de usuario")
 	private Long id;
 
 	@Email
@@ -39,16 +46,21 @@ public class Usuario {
 	@Temporal(TemporalType.DATE)
 	private LocalDate dataCriacao;
 
-	public Usuario() {
+	@OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	@Schema(description = "Tarefas relacionadas")
+	private List<Tarefa> tarefas;
 
+	public Usuario() {
 	}
 
-	public Usuario(Long id, String username, String password, LocalDate dataCriacao) {
+	public Usuario(Long id, String username, String password, LocalDate dataCriacao, List<Tarefa> tarefas) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.dataCriacao = dataCriacao;
+		this.tarefas = tarefas;
 	}
 
 	public Long getId() {
@@ -63,6 +75,14 @@ public class Usuario {
 		return password;
 	}
 
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public List<Tarefa> getTarefas() {
+		return tarefas;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -75,12 +95,12 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public LocalDate getDataCriacao() {
-		return dataCriacao;
-	}
-
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public void setTarefas(List<Tarefa> tarefas) {
+		this.tarefas = tarefas;
 	}
 
 	@Override

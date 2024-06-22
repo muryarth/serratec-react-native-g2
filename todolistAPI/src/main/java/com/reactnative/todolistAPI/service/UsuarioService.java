@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.reactnative.todolistAPI.dto.LoginDTO;
 import com.reactnative.todolistAPI.model.Usuario;
 import com.reactnative.todolistAPI.repository.UsuarioRepository;
 
@@ -41,11 +42,11 @@ public class UsuarioService {
 		return loginOpt.get();
 	}
 
-	public String verifyLogin(Usuario usuario) {
+	public LoginDTO verifyLogin(Usuario usuario) {
 		Optional<Usuario> loginOpt = usuarioRepository.findByUsername(usuario.getUsername());
 		if (loginOpt.isPresent() && ((usuario.getPassword()).equals(loginOpt.get().getPassword()))) {
 			System.out.println("Login Realizado: " + usuario.getUsername());
-			return "Login com sucesso!";
+			return new LoginDTO(usuario.getId(), "Login com sucesso!");
 		}
 		return null;
 	}
