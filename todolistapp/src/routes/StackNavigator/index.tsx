@@ -1,6 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login } from "../pages/Login";
-import { DrawerNavigator } from "./DrawerNavigator";
+import { Login } from "../../pages/Login"
+import { DrawerNavigator } from "../DrawerNavigator";
 
 const Stack = createStackNavigator();
 

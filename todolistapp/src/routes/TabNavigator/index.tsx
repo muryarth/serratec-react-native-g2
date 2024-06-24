@@ -1,30 +1,42 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home } from "../pages/Home";
-import { Text } from "react-native-svg";
-import { CardCreator } from "../pages/CardCreator";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Home } from "../../pages/Home";
+import { CardCreator } from "../../pages/CardCreator";
 import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons/faPenNib";
+import { TabBarIcon } from "./TabBarIcon";
 
 const Tab = createBottomTabNavigator();
 
 function TabNavigator() {
-  const color = { normal: "gray", focused: "cyan" };
+  const color = { normal: "#DCDCDC", focused: "cyan" };
 
   return (
     <Tab.Navigator
       screenOptions={{
+        title: "",
         headerShown: false,
-        tabBarLabelStyle: { color: color.normal },
+        tabBarStyle: {
+          height: 70,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#2E2E2E",
+          borderTopWidth: 2,
+          borderTopColor: "#DCDCDC"
+        },
         tabBarActiveTintColor: color.focused,
         tabBarInactiveTintColor: color.normal,
       }}
     >
       <Tab.Screen
         options={{
-          title: "Feed",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon color={color} size={size} icon={faHouse} />
+            <TabBarIcon
+              title={"Feed"}
+              color={color}
+              iconSize={size}
+              icon={faHouse}
+            />
           ),
         }}
         name="TabsHome"
@@ -32,9 +44,13 @@ function TabNavigator() {
       />
       <Tab.Screen
         options={{
-          title: "Criar",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon color={color} size={size} icon={faPenNib} />
+            <TabBarIcon
+              title={"Criar"}
+              color={color}
+              iconSize={size}
+              icon={faPenNib}
+            />
           ),
         }}
         name="TabsCardCreator"

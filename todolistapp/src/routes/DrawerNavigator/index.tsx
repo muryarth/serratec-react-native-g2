@@ -1,6 +1,6 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Favorites } from "../pages/Favorites";
-import { TabNavigator } from "./TabNavigator";
+import { Favorites } from "../../pages/Favorites";
+import { TabNavigator } from "../TabNavigator";
 
 const Drawer = createDrawerNavigator();
 
