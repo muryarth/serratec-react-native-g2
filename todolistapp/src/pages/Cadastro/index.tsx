@@ -10,8 +10,8 @@ import { DefaultAppButton } from "../../components/DefaultAppButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export function Cadastro() {
-  const [email, setEmail] = useState<string>("");
-  const [senha, setSenha] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [confirmSenha, setConfirmSenha] = useState<string>("");
 
   const navigator = useNavigation();
@@ -23,11 +23,11 @@ export function Cadastro() {
   const [confirmSenhaError, setConfirmSenhaError] = useState<boolean>(false);
 
   const handleEmail = (value: string) => {
-    setEmail(value);
+    setUsername(value);
   };
 
   const handleSenha = (value: string) => {
-    setSenha(value);
+    setPassword(value);
   };
 
   const handleConfirmSenha = (value: string) => {
@@ -48,11 +48,11 @@ export function Cadastro() {
     let senhaErr = false;
     let confirmSenhaErr = false;
 
-    if (!email || !validateEmail(email)) {
+    if (!username || !validateEmail(username)) {
       emailErr = true;
     }
 
-    if (!senha) {
+    if (!password) {
       senhaErr = true;
     }
 
@@ -71,40 +71,40 @@ export function Cadastro() {
     }
   };
 
-  //   const handleCadastro = async () => {
-  //     if (!handleErrors()) {
-  //       if (senha !== confirmSenha) {
-  //         Alert.alert("Erro no cadastro", "Senhas não são iguais!");
-  //       } else {
-  //         try {
-  //           console.log("Tentando conexão com a API...");
-  //           const response = await axios.post(
-  //             "http://10.0.2.2:8080/login/cadastrar",
-  //             { email, senha }
-  //           );
-
-  //           if (response.status === 200) {
-  //             Alert.alert("Cadastro realizado com sucesso!");
-  //             navigator.navigate("StackLogin");
-  //           } else {
-  //             Alert.alert(
-  //               "Cadastro não realizado!",
-  //               response.data.message || "Aconteceu algum erro..."
-  //             );
-  //           }
-  //         } catch (error: any) {
-  //           if (error.response) {
-  //             if (error.response.status === 400) {
-  //               Alert.alert("Cadastro não realizado!", error.response.data);
-  //             }
-  //           } else {
-  //             Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
-  //             console.log("Erro na requisição!", error);
-  //           }
-  //         }
-  //       }
-  //     }
-  //   };
+    // const handleCadastro = async () => {
+    //   if (!handleErrors()) {
+    //     if (password !== confirmSenha) {
+    //       Alert.alert("Erro no cadastro", "Senhas não são iguais!");
+    //     } else {
+    //       try {
+    //         console.log("Tentando conexão com a API...");
+    //         const response = await axios.post(
+    //           "http://10.0.2.2:8080/login/cadastrar",
+    //           { username, password }
+    //         );
+    //         if (response.status === 200) {
+    //           Alert.alert("Cadastro realizado com sucesso!");
+    //           console.log("Cadastro realizado!");
+    //           navigator.navigate("StackLogin");
+    //         } else {
+    //           Alert.alert(
+    //             "Cadastro não realizado!",
+    //             response.data.message || "Aconteceu algum erro..."
+    //           );
+    //         }
+    //       } catch (error: any) {
+    //         if (error.response) {
+    //           if (error.response.status === 400) {
+    //             Alert.alert("Cadastro não realizado!", error.response.data);
+    //           }
+    //         } else {
+    //           Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
+    //           console.log("Erro na requisição!", error);
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
 
   const handleCadastro = () => {
     if (!handleErrors()) {

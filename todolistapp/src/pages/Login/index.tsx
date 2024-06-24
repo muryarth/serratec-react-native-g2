@@ -9,8 +9,8 @@ import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>();
-  const [senha, setSenha] = useState<string>();
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
 
   const navigator = useNavigation();
 
@@ -20,11 +20,11 @@ const Login = () => {
   const [senhaError, setSenhaError] = useState<boolean>(false);
 
   const handleEmail = (value: string) => {
-    setEmail(value);
+    setUsername(value);
   };
 
   const handleSenha = (value: string) => {
-    setSenha(value);
+    setPassword(value);
   };
 
   const handleCadastro = () => {
@@ -40,11 +40,11 @@ const Login = () => {
     let emailErr = false;
     let senhaErr = false;
 
-    if (!email || !validateEmail(email)) {
+    if (!username || !validateEmail(username)) {
       emailErr = true;
     }
 
-    if (!senha) {
+    if (!password) {
       senhaErr = true;
     }
 
@@ -62,13 +62,12 @@ const Login = () => {
   //   if (!handleErrors()) {
   //     try {
   //       const response = await axios.post("http://10.0.2.2:8080/login", {
-  //         email,
-  //         senha,
+  //         username,
+  //         password,
   //       });
-
   //       if (response.status === 200) {
   //         Alert.alert("Login realizado!");
-
+  //         console.log("Login realizado!");
   //         navigator.navigate("StackHome");
   //       } else {
   //         Alert.alert(
@@ -79,7 +78,7 @@ const Login = () => {
   //     } catch (error: any) {
   //       if (error.response) {
   //         if (error.response.status === 401) {
-  //           Alert.alert("Login não realizado!", error.response.data);
+  //           Alert.alert("Login não realizado!", "Email ou senha invalidos!");
   //         }
   //       } else {
   //         Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
