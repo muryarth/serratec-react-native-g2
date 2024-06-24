@@ -1,9 +1,11 @@
 import { View, Text } from "react-native";
+import Card from "../../components/CardComponent";
 
 const Favorites = () => {
   return (
     <View>
-      <Text>Favorites</Text>
+      <Card/>
+      {/* <Text>Favorites</Text> */}
     </View>
   );
 };

@@ -5,9 +5,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     paddingBottom: 10,
-    margin: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    marginVertical: 5,
+    marginHorizontal: 20,
     borderRadius: 14,
     shadowColor: "#000",
     shadowOffset: {

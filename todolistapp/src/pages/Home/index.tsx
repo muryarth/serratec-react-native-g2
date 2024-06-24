@@ -1,5 +1,4 @@
-import { View, Text } from "react-native";
-import { DefaultAppButton } from "../../components/DefaultAppButton";
+import { View } from "react-native";
 import Card from "../../components/CardComponent";
 
 const Home = () => {

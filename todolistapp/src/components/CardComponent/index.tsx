@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { styles } from "./style";
 import { useState } from "react";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
