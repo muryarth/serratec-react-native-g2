@@ -1,41 +1,48 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
-export const style = StyleSheet.create({
-    
-    cardContainer:{
-
-        padding: 10,
-        margin: 20,
-        minHeight: 100,
-        backgroundColor: "#afeeee",
-        borderRadius: 20,
-        
-        marginLeft: 20,
-        marginRight: 20,
-        
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 5,
-            height: 5,
-        },
-        shadowOpacity: 0.25,
-        elevation: 9, 
-
+export const styles = StyleSheet.create({
+  cardContainer: {
+    alignItems: "center",
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+    margin: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: 14,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5,
     },
-    
-    cardTitle:{
-        textAlign: "center",
-        fontSize: 20,
-        borderBottomColor: '#000',
-        paddingBottom: 5,
-        paddingTop: 5,
-        borderBottomWidth: 1
-    },
-    
+    shadowOpacity: 0.25,
+    elevation: 9,
+  },
 
-    cardBody:{
-        fontSize:15,
-        textAlign: "justify",
-    }
+  cardTitle: {
+    textAlign: "center",
+    fontWeight: "500",
+    fontSize: 23,
+    width: "60%",
+  },
 
-})
+  cardHeaderButtons: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "absolute",
+    height: 33,
+    width: "100%",
+  },
+
+  cardHeaderButtonsLeft: {
+    flexDirection: "row",
+    gap: 9,
+  },
+
+  cardContent: {
+    fontSize: 15,
+    textAlign: "justify",
+    paddingVertical: 8,
+  },
+});
