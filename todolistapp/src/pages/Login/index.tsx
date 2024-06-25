@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   const handleCadastro = () => {
-    navigator.navigate("StackCadastro");
+    navigator.navigate("StackCadastro",{name:'cadastro'});
   };
 
   const validateEmail = (email: string) => {
@@ -90,7 +90,7 @@ const Login = () => {
 
   const handleLogin = () => {
     if (!handleErrors()) {
-      navigator.navigate("StackHome");
+      navigator.navigate("StackHome",{name:'home'});
     }
   };
 

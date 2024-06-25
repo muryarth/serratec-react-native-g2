@@ -3,7 +3,12 @@ import { Login } from "../../pages/Login"
 import { Cadastro } from "../../pages/Cadastro";
 import { DrawerNavigator } from "../DrawerNavigator";
 
-const Stack = createStackNavigator();
+export type ParametrosDaRota ={
+  StackLogin:{name:string};
+  StackCadastro:{name:string};
+  StackHome:{name:string};
+}
+const Stack = createStackNavigator<ParametrosDaRota>();
 
 const StackNavigator = () => {
   return (
