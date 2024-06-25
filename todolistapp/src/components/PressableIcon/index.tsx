@@ -7,19 +7,21 @@ interface PressableIconProps {
   icon: IconDefinition;
   size?: number;
   color?: string;
+  style?: {};
 }
 
 const PressableIcon = ({
   color,
   size = 20,
   icon,
+  style,
   onPress,
 }: PressableIconProps) => {
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity style={style} onPress={onPress}>
       <FontAwesomeIcon color={color} size={size} icon={icon} />
     </TouchableOpacity>
   );
 };
 
-export default PressableIcon;
+export { PressableIcon };

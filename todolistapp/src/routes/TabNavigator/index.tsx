@@ -22,7 +22,7 @@ function TabNavigator() {
           alignItems: "center",
           backgroundColor: "#2E2E2E",
           borderTopWidth: 2,
-          borderTopColor: "#DCDCDC"
+          borderTopColor: "#DCDCDC",
         },
         tabBarActiveTintColor: color.focused,
         tabBarInactiveTintColor: color.normal,
