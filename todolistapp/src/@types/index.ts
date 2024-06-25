@@ -4,6 +4,5 @@ export type Card = {
   autor: string;
   descricao: string;
   dataCriacao: Date;
-  dataModificacao: Date;
   color: string;
 }[];

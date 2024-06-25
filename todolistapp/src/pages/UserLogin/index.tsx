@@ -7,8 +7,9 @@ import Icon from "@expo/vector-icons/Ionicons";
 import { styles } from "./style";
 import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
+import { width } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
-const Login = () => {
+const UserLogin = () => {
   const [username, setUsername] = useState<string>();
   const [password, setPassword] = useState<string>();
 
@@ -28,7 +29,7 @@ const Login = () => {
   };
 
   const handleCadastro = () => {
-    navigator.navigate("StackCadastro",{name:'cadastro'});
+    navigator.navigate("StackCadastro", { name: "cadastro" });
   };
 
   const validateEmail = (email: string) => {
@@ -90,7 +91,7 @@ const Login = () => {
 
   const handleLogin = () => {
     if (!handleErrors()) {
-      navigator.navigate("StackHome",{name:'home'});
+      navigator.navigate("StackHome", { name: "home" });
     }
   };
 
@@ -122,15 +123,19 @@ const Login = () => {
               error={senhaError}
               errorText="Preencha a senha!"
             />
-          </View>
 
-          <View style={styles.buttons}>
-            <DefaultAppButton titulo="Entrar" customOnPress={handleLogin} />
-
-            <DefaultAppButton
-              titulo="Cadastrar"
-              customOnPress={handleCadastro}
-            />
+            <View style={styles.buttons}>
+              <DefaultAppButton
+                style={{ width: "90%" }}
+                title="Entrar"
+                customOnPress={handleLogin}
+              />
+              <DefaultAppButton
+                style={{ width: "90%" }}
+                title="Cadastrar"
+                customOnPress={handleCadastro}
+              />
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -138,4 +143,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export { UserLogin };

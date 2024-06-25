@@ -8,9 +8,9 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
-  icon: {
-    marginTop: -60,
-    color: "#ccc",
+  containerIcon: {
+    alignItems: "center",
+    // backgroundColor: "black",
   },
 
   title: {
@@ -20,6 +20,10 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
 
+  icon: {
+    color: "#ccc",
+  },
+
   textinput: {
     marginTop: 130,
     width: "95%",
@@ -27,7 +31,8 @@ export const styles = StyleSheet.create({
   },
 
   buttons: {
-    width: '90%',
+    width: "90%",
     marginBottom: 100,
+    alignItems: "center",
   },
 });

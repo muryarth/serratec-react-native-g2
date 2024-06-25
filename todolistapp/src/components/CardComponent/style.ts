@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 10,
     paddingBottom: 10,
-    marginVertical: 5,
-    marginHorizontal: 50,
+    marginVertical: 10,
+    marginHorizontal: 25,
     borderRadius: 14,
     shadowColor: "#000",
     shadowOffset: {
@@ -17,31 +17,12 @@ export const styles = StyleSheet.create({
     elevation: 9,
   },
 
-  cardTitle: {
-    textAlign: "center",
-    fontWeight: "500",
-    fontSize: 23,
-    width: "60%",
-  },
-
-  cardHeaderButtons: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    position: "absolute",
-    height: 33,
-    width: "100%",
-  },
-
-  cardHeaderButtonsLeft: {
-    flexDirection: "row",
-    gap: 9,
-  },
-
   cardContent: {
-    fontSize: 15,
+    paddingHorizontal: 15,
+    lineHeight: 30,
+    minHeight: 120,
+    fontSize: 16,
     textAlign: "justify",
-    paddingVertical: 8,
+    paddingVertical: 21,
   },
 });

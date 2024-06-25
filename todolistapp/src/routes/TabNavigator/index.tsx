@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Home } from "../../pages/Home";
-import { CardCreator } from "../../pages/CardCreator";
+import { Home } from "../../pages/CardsHome";
+import { CardCreator } from "../../pages/CardsCreator";
 import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons/faPenNib";
 import { TabBarIcon } from "./TabBarIcon";
@@ -21,8 +21,6 @@ function TabNavigator() {
           flexDirection: "row",
           alignItems: "center",
           backgroundColor: "#2E2E2E",
-          borderTopWidth: 2,
-          borderTopColor: "#DCDCDC",
         },
         tabBarActiveTintColor: color.focused,
         tabBarInactiveTintColor: color.normal,

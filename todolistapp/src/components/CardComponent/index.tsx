@@ -12,13 +12,20 @@ interface CardProps {
   date: string;
   favorited?: boolean;
   color?: string;
+  handlePinPress: () => void;
+  handleFavoritePress: () => void;
+  handleRemovePress: () => void;
 }
 
 const Card = ({
+  date,
   favorited = false,
   color = "#afeeee",
   title = "Título",
   content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quia eveniet voluptatum, facere tempora officia facilis dolores, sit, deserunt esse repellat? Commodi ab cumque nostrum necessitatibus expedita perferendis consequatur unde?",
+  handlePinPress = () => {},
+  handleFavoritePress = () => {},
+  handleRemovePress = () => {},
 }: CardProps) => {
   const [showText, setShowText] = useState<boolean>(false);
 
@@ -27,18 +34,32 @@ const Card = ({
 
   return (
     <View style={[styles.cardContainer, { backgroundColor: color }]}>
-      <CardHeader title={title} />
+      <CardHeader
+        favorited={favorited}
+        title={title}
+        handlePinPress={handlePinPress}
+        handleFavoritePress={handleFavoritePress}
+        handleRemovePress={handleRemovePress}
+      />
 
       <Text
-        style={[styles.cardContent, { minHeight: 80 }]}
+        style={[styles.cardContent, { width: "100%" }]}
         numberOfLines={showText ? 0 : 4}
         ellipsizeMode="tail"
       >
         {content}
       </Text>
 
-      <View>
-        {content.length > 180 && (
+      <View
+        style={{
+          width: "100%",
+          height: 50,
+          alignItems: "center",
+          gap: 10,
+        }}
+      >
+        <Text style={{ alignSelf: "center" }}>{date}</Text>
+        {content.length > 153 && (
           <PressableIcon
             icon={showText ? faAngleUp : faAngleDown}
             onPress={toggleShowText}
@@ -49,4 +70,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export { Card };

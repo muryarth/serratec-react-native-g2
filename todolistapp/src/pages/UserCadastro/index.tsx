@@ -8,8 +8,9 @@ import { styles } from "./style";
 import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { width } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
-export function Cadastro() {
+function UserCadastro() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmSenha, setConfirmSenha] = useState<string>("");
@@ -71,40 +72,40 @@ export function Cadastro() {
     }
   };
 
-    // const handleCadastro = async () => {
-    //   if (!handleErrors()) {
-    //     if (password !== confirmSenha) {
-    //       Alert.alert("Erro no cadastro", "Senhas não são iguais!");
-    //     } else {
-    //       try {
-    //         console.log("Tentando conexão com a API...");
-    //         const response = await axios.post(
-    //           "http://10.0.2.2:8080/login/cadastrar",
-    //           { username, password }
-    //         );
-    //         if (response.status === 200) {
-    //           Alert.alert("Cadastro realizado com sucesso!");
-    //           console.log("Cadastro realizado!");
-    //           navigator.navigate("StackLogin");
-    //         } else {
-    //           Alert.alert(
-    //             "Cadastro não realizado!",
-    //             response.data.message || "Aconteceu algum erro..."
-    //           );
-    //         }
-    //       } catch (error: any) {
-    //         if (error.response) {
-    //           if (error.response.status === 400) {
-    //             Alert.alert("Cadastro não realizado!", error.response.data);
-    //           }
-    //         } else {
-    //           Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
-    //           console.log("Erro na requisição!", error);
-    //         }
-    //       }
-    //     }
-    //   }
-    // };
+  // const handleCadastro = async () => {
+  //   if (!handleErrors()) {
+  //     if (password !== confirmSenha) {
+  //       Alert.alert("Erro no cadastro", "Senhas não são iguais!");
+  //     } else {
+  //       try {
+  //         console.log("Tentando conexão com a API...");
+  //         const response = await axios.post(
+  //           "http://10.0.2.2:8080/login/cadastrar",
+  //           { username, password }
+  //         );
+  //         if (response.status === 200) {
+  //           Alert.alert("Cadastro realizado com sucesso!");
+  //           console.log("Cadastro realizado!");
+  //           navigator.navigate("StackLogin");
+  //         } else {
+  //           Alert.alert(
+  //             "Cadastro não realizado!",
+  //             response.data.message || "Aconteceu algum erro..."
+  //           );
+  //         }
+  //       } catch (error: any) {
+  //         if (error.response) {
+  //           if (error.response.status === 400) {
+  //             Alert.alert("Cadastro não realizado!", error.response.data);
+  //           }
+  //         } else {
+  //           Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
+  //           console.log("Erro na requisição!", error);
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   const handleCadastro = () => {
     if (!handleErrors()) {
@@ -147,20 +148,25 @@ export function Cadastro() {
               error={confirmSenhaError}
               errorText="Preencha o confirma senha!"
             />
-          </View>
-          <View style={styles.buttons}>
-            <DefaultAppButton
-              titulo="Cadastrar"
-              customOnPress={handleCadastro}
-            />
 
-            <DefaultAppButton
-              titulo="Voltar ao login"
-              customOnPress={handleLogin}
-            />
+            <View style={styles.buttons}>
+              <DefaultAppButton
+                style={{ width: "90%" }}
+                title="Cadastrar"
+                customOnPress={handleCadastro}
+              />
+
+              <DefaultAppButton
+                style={{ width: "90%" }}
+                title="Voltar ao login"
+                customOnPress={handleLogin}
+              />
+            </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
+
+export { UserCadastro };

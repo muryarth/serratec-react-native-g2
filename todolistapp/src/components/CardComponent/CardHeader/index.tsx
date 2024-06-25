@@ -9,22 +9,21 @@ import { styles } from "./style";
 interface CardHeadeProps {
   title: string;
   favorited?: boolean;
+  handlePinPress: () => void;
+  handleFavoritePress: () => void;
+  handleRemovePress: () => void;
 }
 
-const CardHeader = ({ title, favorited }: CardHeadeProps) => {
+const CardHeader = ({
+  title,
+  favorited,
+  handleFavoritePress,
+  handlePinPress,
+  handleRemovePress,
+}: CardHeadeProps) => {
   return (
-    <View
-      style={{
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        height: 55,
-        borderBottomColor: "#000",
-        borderBottomWidth: 1,
-        paddingHorizontal: 10,
-      }}
-    >
-      <Text style={styles.cardTitle}>{title}</Text>
+    <View style={styles.cardHeaderContainer}>
+      <Text style={styles.cardHeaderTitle}>{title}</Text>
 
       <View style={styles.cardHeaderButtons}>
         <View style={styles.cardHeaderButtonsLeft}>
@@ -32,13 +31,12 @@ const CardHeader = ({ title, favorited }: CardHeadeProps) => {
             size={20}
             color={favorited ? "#ffe716" : "#000"}
             icon={favorited ? faStarSolid : faStarRegular}
-            onPress={() => {}}
+            onPress={handleFavoritePress}
           />
           <PressableIcon
-            size={20}
-            // color="blue"
+            size={18}
             icon={faThumbtack}
-            onPress={() => {}}
+            onPress={handlePinPress}
           />
         </View>
 
@@ -46,7 +44,7 @@ const CardHeader = ({ title, favorited }: CardHeadeProps) => {
           color="red"
           size={20}
           icon={faXmark}
-          onPress={() => {}}
+          onPress={handleRemovePress}
         />
       </View>
     </View>

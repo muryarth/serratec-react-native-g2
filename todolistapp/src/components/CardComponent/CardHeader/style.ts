@@ -1,10 +1,20 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  cardTitle: {
+  cardHeaderContainer: {
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 55,
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
+    paddingHorizontal: 10,
+  },
+
+  cardHeaderTitle: {
     textAlign: "center",
-    fontWeight: "500",
-    fontSize: 23,
+    fontWeight: "400",
+    fontSize: 19,
     width: "60%",
   },
 
@@ -19,6 +29,7 @@ const styles = StyleSheet.create({
   },
 
   cardHeaderButtonsLeft: {
+    alignItems: "center",
     flexDirection: "row",
     gap: 9,
   },

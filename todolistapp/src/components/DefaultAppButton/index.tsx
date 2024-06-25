@@ -1,23 +1,20 @@
 import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./style";
+import { width } from "@fortawesome/free-solid-svg-icons/faAngleUp";
 
 interface ButtonProps {
-  titulo: string;
+  title: string;
   customOnPress?: () => void;
-  color?: string;
+  style?: {};
 }
 
-const DefaultAppButton = ({
-  titulo,
-  customOnPress,
-  color = "#ccc",
-}: ButtonProps) => {
+const DefaultAppButton = ({ title, customOnPress, style }: ButtonProps) => {
   return (
     <TouchableOpacity
-      style={[styles.defaultAppButton, {backgroundColor: color}]}
+      style={[styles.defaultAppButton, { ...style }]}
       onPress={customOnPress}
     >
-      <Text>{titulo}</Text>
+      <Text style={styles.defaultAppButtonText}>{title}</Text>
     </TouchableOpacity>
   );
 };
