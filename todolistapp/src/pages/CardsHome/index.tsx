@@ -1,16 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { View, FlatList } from "react-native";
 import { styles } from "./style";
 import { HomeEmpty } from "./HomeEmpty";
 import { HomeHeader } from "./HomeHeader";
 import { Card as CardComponent } from "../../components/CardComponent";
-import { Card, CardsList } from "../../@types";
+import { CardsList } from "../../@types";
+import { useAuth } from "../../hooks/useAuth";
 
 const Home = () => {
   const [cards, setCards] = useState<CardsList>([]);
-
+  const { favs, setFavs } = useAuth();
   const handleDeleteCard = async (id: number) => {
     axios
       .delete(`https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete/${id}`)
@@ -18,7 +18,17 @@ const Home = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleFavoriteCard = (id: number) => {};
+  const handleFavoriteCard = (id: number) => {
+    setCards(
+      cards.map((e) => {
+        if (e.id == id) {
+          e.favorited = !e.favorited;
+        }
+        return e;
+      })
+    );
+    setFavs(cards.filter((e) => e.favorited));
+  };
 
   const handlePinCard = (id: number) => {
     setCards(
@@ -82,13 +92,14 @@ const Home = () => {
         renderItem={({ item }) => (
           <>
             <CardComponent
+              favorited={item.favorited}
               pinned={item.pinned}
               color={item.color}
               title={item.titulo}
               content={item.descricao}
               date={new Date(item.dataCriacao).toLocaleString()}
               handlePinPress={() => handlePinCard(item.id)}
-              handleFavoritePress={() => {}}
+              handleFavoritePress={() => handleFavoriteCard(item.id)}
               handleRemovePress={() => handleDeleteCard(item.id)}
             />
           </>

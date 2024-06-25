@@ -2,8 +2,11 @@ import { useNavigation } from "@react-navigation/native";
 import { createContext, useContext, useEffect, useState } from "react";
 import { validateUser } from "../services/auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { CardsList } from "../@types";
 
 export type ContextDataType = {
+  favs: CardsList;
+  setFavs: (value: CardsList) => void;
   email: string;
   setEmail: (value: string) => void;
   password: string;
@@ -25,6 +28,8 @@ const Context = createContext<ContextDataType>({
   userId: 0,
   setUserId: () => {},
   loginAuth: () => {},
+  favs: [],
+  setFavs: () => {},
 });
 
 const AuthProvider = ({ children }: any) => {
@@ -32,6 +37,7 @@ const AuthProvider = ({ children }: any) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
+  const [favs, setFavs] = useState<CardsList>([]);
 
   const loginAuth = (
     username: string,
@@ -86,6 +92,8 @@ const AuthProvider = ({ children }: any) => {
   return (
     <Context.Provider
       value={{
+        favs,
+        setFavs,
         email,
         setEmail,
         password,

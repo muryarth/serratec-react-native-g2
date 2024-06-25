@@ -6,6 +6,7 @@ export type Card = {
   dataCriacao: Date;
   color: string;
   pinned: boolean;
+  favorited: boolean;
 };
 
 export type CardsList = Card[];
