@@ -5,12 +5,11 @@ import { View, FlatList } from "react-native";
 import { styles } from "./style";
 import { HomeEmpty } from "./HomeEmpty";
 import { HomeHeader } from "./HomeHeader";
-import { Card } from "../../components/CardComponent";
-import { Card as CardProps } from "../../@types";
+import { Card as CardComponent } from "../../components/CardComponent";
+import { Card, CardsList } from "../../@types";
 
 const Home = () => {
-  const [cards, setCards] = useState<CardProps>([]);
-  const [pinnedCards, setPinnedCards] = useState<CardProps>([]);
+  const [cards, setCards] = useState<CardsList>([]);
 
   const handleDeleteCard = async (id: number) => {
     axios
@@ -21,14 +20,23 @@ const Home = () => {
 
   const handleFavoriteCard = (id: number) => {};
 
-  const handlePinCard = (id: number) => {};
+  const handlePinCard = (id: number) => {
+    setCards(
+      cards.map((e) => {
+        if (e.id == id) {
+          e.pinned = !e.pinned;
+        }
+        return e;
+      })
+    );
+  };
 
   const generateRandomKey = (range: number, lastKey?: number): number => {
     const number = Math.floor(Math.random() * range);
     return number !== lastKey ? number : generateRandomKey(range, lastKey);
   };
 
-  const setRandomCardColors = (cards: CardProps, colors: string[]) => {
+  const setRandomCardColors = (cards: CardsList, colors: string[]) => {
     let lastKey = colors.length;
 
     setCards(
@@ -66,18 +74,24 @@ const Home = () => {
         ListEmptyComponent={<HomeEmpty />}
         ListHeaderComponent={<HomeHeader />}
         style={{ flex: 1 }}
-        data={cards}
+        data={[
+          ...cards.filter((e) => e.pinned),
+          ...cards.filter((e) => !e.pinned),
+        ]}
         keyExtractor={(item, index) => `${item.id}-${index}`}
         renderItem={({ item }) => (
-          <Card
-            color={item.color}
-            title={item.titulo}
-            content={item.descricao}
-            date={new Date(item.dataCriacao).toLocaleString()}
-            handlePinPress={() => {}}
-            handleFavoritePress={() => {}}
-            handleRemovePress={() => handleDeleteCard(item.id)}
-          />
+          <>
+            <CardComponent
+              pinned={item.pinned}
+              color={item.color}
+              title={item.titulo}
+              content={item.descricao}
+              date={new Date(item.dataCriacao).toLocaleString()}
+              handlePinPress={() => handlePinCard(item.id)}
+              handleFavoritePress={() => {}}
+              handleRemovePress={() => handleDeleteCard(item.id)}
+            />
+          </>
         )}
       />
     </View>

@@ -5,4 +5,7 @@ export type Card = {
   descricao: string;
   dataCriacao: Date;
   color: string;
-}[];
+  pinned: boolean;
+};
+
+export type CardsList = Card[];

@@ -7,6 +7,7 @@ import { PressableIcon } from "../../PressableIcon";
 import { styles } from "./style";
 
 interface CardHeadeProps {
+  pinned?: boolean;
   title: string;
   favorited?: boolean;
   handlePinPress: () => void;
@@ -15,8 +16,9 @@ interface CardHeadeProps {
 }
 
 const CardHeader = ({
+  pinned = false,
   title,
-  favorited,
+  favorited = false,
   handleFavoritePress,
   handlePinPress,
   handleRemovePress,
@@ -34,6 +36,7 @@ const CardHeader = ({
             onPress={handleFavoritePress}
           />
           <PressableIcon
+            color={pinned ? "#5171a3" : "#000"}
             size={18}
             icon={faThumbtack}
             onPress={handlePinPress}

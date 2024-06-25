@@ -7,6 +7,7 @@ import { CardHeader } from "./CardHeader";
 import { PressableIcon } from "../PressableIcon";
 
 interface CardProps {
+  pinned?: boolean;
   title: string;
   content: string;
   date: string;
@@ -18,6 +19,7 @@ interface CardProps {
 }
 
 const Card = ({
+  pinned = false,
   date,
   favorited = false,
   color = "#afeeee",
@@ -36,6 +38,7 @@ const Card = ({
     <View style={[styles.cardContainer, { backgroundColor: color }]}>
       <CardHeader
         favorited={favorited}
+        pinned={pinned}
         title={title}
         handlePinPress={handlePinPress}
         handleFavoritePress={handleFavoritePress}
