@@ -7,8 +7,8 @@ const HomeHeader = () => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Bem vindo! </Text>
       <Text style={styles.headerText}>{email} </Text>
+      <Text style={styles.headerText}>Bem vindo! </Text>
     </View>
   );
 };
