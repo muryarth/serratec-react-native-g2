@@ -1,98 +1,47 @@
-import { Text, SafeAreaView, Keyboard, Alert, View } from "react-native";
+import axios from "axios";
+import Icon from "@expo/vector-icons/Ionicons";
+import { Text, SafeAreaView, Keyboard, View } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import Icon from "@expo/vector-icons/Ionicons";
 import { styles } from "./style";
 import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
-import { width } from "@fortawesome/free-solid-svg-icons/faAngleUp";
+import { useAuth } from "../../hooks/useAuth";
+import { validateEmail } from "../../services/auth";
 
 const UserLogin = () => {
-  const [username, setUsername] = useState<string>();
-  const [password, setPassword] = useState<string>();
-
+  // const [username, setUsername] = useState<string>();
+  // const [password, setPassword] = useState<string>();
   const navigator = useNavigation();
-
   const placeholderColor = "#000";
-
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [senhaError, setSenhaError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  // Extraindo do Context
+  const { email, setEmail } = useAuth();
+  const { password, setPassword } = useAuth();
+  const { loginAuth } = useAuth();
 
   const handleEmail = (value: string) => {
-    setUsername(value);
+    setEmailError(false);
+    setEmail(value);
   };
 
   const handleSenha = (value: string) => {
+    setPasswordError(false);
     setPassword(value);
+  };
+
+  const handleLogin = () => {
+    loginAuth(email, password, () => {
+      if (!email || !validateEmail(email)) setEmailError(true);
+      if (!password) setPasswordError(true);
+    });
   };
 
   const handleCadastro = () => {
     navigator.navigate("StackCadastro", { name: "cadastro" });
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  const handleErrors = () => {
-    let emailErr = false;
-    let senhaErr = false;
-
-    if (!username || !validateEmail(username)) {
-      emailErr = true;
-    }
-
-    if (!password) {
-      senhaErr = true;
-    }
-
-    setEmailError(emailErr);
-    setSenhaError(senhaErr);
-
-    if (!emailErr && !senhaErr) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  // const handleLogin = async () => {
-  //   if (!handleErrors()) {
-  //     try {
-  //       const response = await axios.post("http://10.0.2.2:8080/login", {
-  //         username,
-  //         password,
-  //       });
-  //       if (response.status === 200) {
-  //         Alert.alert("Login realizado!");
-  //         console.log("Login realizado!");
-  //         navigator.navigate("StackHome");
-  //       } else {
-  //         Alert.alert(
-  //           "Login não realizado!",
-  //           response.data.message || "Aconteceu algum erro..."
-  //         );
-  //       }
-  //     } catch (error: any) {
-  //       if (error.response) {
-  //         if (error.response.status === 401) {
-  //           Alert.alert("Login não realizado!", "Email ou senha invalidos!");
-  //         }
-  //       } else {
-  //         Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
-  //         console.log("Erro na requisição!", error);
-  //       }
-  //     }
-  //   }
-  // };
-
-  const handleLogin = () => {
-    if (!handleErrors()) {
-      navigator.navigate("StackHome", { name: "home" });
-    }
   };
 
   return (
@@ -108,6 +57,7 @@ const UserLogin = () => {
             </View>
 
             <TextInputComponent
+              value={email}
               placeholder="Digite seu email"
               placeholderColor={placeholderColor}
               onChangeValue={handleEmail}
@@ -116,11 +66,12 @@ const UserLogin = () => {
             />
 
             <TextInputComponent
+              value={password}
               onChangeValue={handleSenha}
               placeholderColor={placeholderColor}
               placeholder="Digite sua senha"
               type={true}
-              error={senhaError}
+              error={passwordError}
               errorText="Preencha a senha!"
             />
 
