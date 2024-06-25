@@ -8,7 +8,7 @@ const HomeEmpty = () => {
   const navigator = useNavigation();
 
   const handleNavigation = () => {
-    navigator.navigate("TabsCardCreator");
+    navigator.navigate("TabsCardCreator", { name: "Criar" });
   };
 
   return (

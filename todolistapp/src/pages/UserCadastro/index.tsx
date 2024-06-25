@@ -36,7 +36,7 @@ function UserCadastro() {
   };
 
   const handleLogin = () => {
-    navigator.navigate("StackLogin");
+    navigator.navigate("StackLogin", { name: "Login" });
   };
 
   const validateEmail = (email: string) => {
@@ -109,7 +109,7 @@ function UserCadastro() {
 
   const handleCadastro = () => {
     if (!handleErrors()) {
-      navigator.navigate("StackLogin");
+      navigator.navigate("StackLogin", { name: "Login" });
     }
   };
 

@@ -4,8 +4,9 @@ import { CardCreator } from "../../pages/CardsCreator";
 import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 import { faPenNib } from "@fortawesome/free-solid-svg-icons/faPenNib";
 import { TabBarIcon } from "./TabBarIcon";
+import { BottomTabNavigationParams } from "../types";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabNavigationParams>();
 
 function TabNavigator() {
   const color = { normal: "#DCDCDC", focused: "cyan" };

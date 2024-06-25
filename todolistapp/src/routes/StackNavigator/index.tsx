@@ -2,13 +2,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { UserLogin } from "../../pages/UserLogin";
 import { UserCadastro } from "../../pages/UserCadastro";
 import { DrawerNavigator } from "../DrawerNavigator";
+import { StackNavigationParams } from "../types";
 
-export type ParametrosDaRota = {
-  StackLogin: { name: string };
-  StackCadastro: { name: string };
-  StackHome: { name: string };
-};
-const Stack = createStackNavigator<ParametrosDaRota>();
+const Stack = createStackNavigator<StackNavigationParams>();
 
 const StackNavigator = () => {
   return (

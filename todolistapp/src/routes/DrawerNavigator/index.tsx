@@ -1,8 +1,9 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { CardsFavorites } from "../../pages/CardsFavorites";
 import { TabNavigator } from "../TabNavigator";
+import { DrawerNavigationParams } from "../types";
 
-const Drawer = createDrawerNavigator();
+const Drawer = createDrawerNavigator<DrawerNavigationParams>();
 
 const DrawerNavigator = () => {
   return (
@@ -18,14 +19,14 @@ const DrawerNavigator = () => {
         options={{
           title: "Lembretes",
         }}
-        name="DrawerHome"
+        name="DrawerCards"
         component={TabNavigator}
       />
       <Drawer.Screen
         options={{
           title: "Favoritos",
         }}
-        name="DrawerCardCreator"
+        name="DrawerFavorites"
         component={CardsFavorites}
       />
     </Drawer.Navigator>
