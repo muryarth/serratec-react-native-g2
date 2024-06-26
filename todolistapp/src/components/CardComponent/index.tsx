@@ -1,74 +1,93 @@
 import { View, Text } from "react-native";
 import { styles } from "./style";
 import { useState } from "react";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons/faAngleUp";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons/faAngleDown";
 import { CardHeader } from "./CardHeader";
-import { PressableIcon } from "../PressableIcon";
+import CardFooter from "./CardFooter";
 
 interface CardProps {
+  editDisabled?: boolean;
+  editVisible?: boolean;
+  handleEditPress?: () => void;
   pinned?: boolean;
+  pinDisabled?: boolean;
+  pinVisible?: boolean;
+  handlePinPress?: () => void;
+  favorited?: boolean;
+  favoriteDisabled?: boolean;
+  favoriteVisible?: boolean;
+  handleFavoritePress?: () => void;
+  removeDisabled?: boolean;
+  removeVisible?: boolean;
+  handleRemovePress?: () => void;
+  width?: number | `${number}%` | "auto";
+  height?: number | `${number}%` | "auto";
   title: string;
   content: string;
   date: string;
-  favorited?: boolean;
   color?: string;
-  handlePinPress: () => void;
-  handleFavoritePress: () => void;
-  handleRemovePress: () => void;
 }
 
 const Card = ({
-  pinned = false,
+  editDisabled,
+  editVisible,
+  handleEditPress = () => {},
+  pinDisabled,
+  pinVisible,
+  handlePinPress = () => {},
+  favoriteDisabled,
+  favoriteVisible,
+  handleFavoritePress = () => {},
+  removeDisabled,
+  removeVisible,
+  handleRemovePress = () => {},
+  width = "100%",
+  height = "auto",
+  title,
+  content,
   date,
+  pinned = false,
   favorited = false,
   color = "#afeeee",
-  title = "Título",
-  content = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis quia eveniet voluptatum, facere tempora officia facilis dolores, sit, deserunt esse repellat? Commodi ab cumque nostrum necessitatibus expedita perferendis consequatur unde?",
-  handlePinPress = () => {},
-  handleFavoritePress = () => {},
-  handleRemovePress = () => {},
 }: CardProps) => {
   const [showText, setShowText] = useState<boolean>(false);
 
-  // Motra/Esconde o texto do card
   const toggleShowText = () => setShowText(!showText);
 
   return (
     <View style={[styles.cardContainer, { backgroundColor: color }]}>
       <CardHeader
-        favorited={favorited}
-        pinned={pinned}
         title={title}
-        handlePinPress={handlePinPress}
-        handleFavoritePress={handleFavoritePress}
+        removeDisabled={removeDisabled}
+        removeVisible={removeVisible}
         handleRemovePress={handleRemovePress}
       />
 
       <Text
-        style={[styles.cardContent, { width: "100%" }]}
+        style={[styles.cardContent, { width: width, height: height }]}
         numberOfLines={showText ? 0 : 4}
         ellipsizeMode="tail"
       >
         {content}
       </Text>
 
-      <View
-        style={{
-          width: "100%",
-          height: 50,
-          alignItems: "center",
-          gap: 10,
-        }}
-      >
-        <Text style={{ alignSelf: "center" }}>{date}</Text>
-        {content.length > 153 && (
-          <PressableIcon
-            icon={showText ? faAngleUp : faAngleDown}
-            onPress={toggleShowText}
-          />
-        )}
-      </View>
+      <CardFooter
+        date={date}
+        content={content}
+        length={153}
+        showText={showText}
+        pinned={pinned}
+        pinDisabled={pinDisabled}
+        pinVisible={pinVisible}
+        favorited={favorited}
+        favoriteDisabled={favoriteDisabled}
+        favoriteVisible={favoriteVisible}
+        editDisabled={editDisabled}
+        editVisible={editVisible}
+        handlePinPress={handlePinPress}
+        handleFavoritePress={handleFavoritePress}
+        handleEditPress={handleEditPress}
+        toggleShowText={toggleShowText}
+      />
     </View>
   );
 };

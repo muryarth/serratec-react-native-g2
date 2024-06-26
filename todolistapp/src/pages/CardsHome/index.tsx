@@ -1,45 +1,19 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { View, FlatList } from "react-native";
-import { styles } from "./style";
+import { useEffect } from "react";
+import { FlatList } from "react-native";
 import { HomeEmpty } from "./HomeEmpty";
 import { HomeHeader } from "./HomeHeader";
 import { Card as CardComponent } from "../../components/CardComponent";
 import { CardsList } from "../../@types";
 import { useAuth } from "../../hooks/useAuth";
+import {
+  handleFavoriteCard,
+  handleDeleteCard,
+  handlePinCard,
+} from "../../services/CardController";
 
 const Home = () => {
-  const [cards, setCards] = useState<CardsList>([]);
-  const { favs, setFavs } = useAuth();
-  const handleDeleteCard = async (id: number) => {
-    axios
-      .delete(`https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete/${id}`)
-      .then(() => setCards(cards.filter((card) => card.id !== id)))
-      .catch((error) => console.log(error));
-  };
-
-  const handleFavoriteCard = (id: number) => {
-    setCards(
-      cards.map((e) => {
-        if (e.id == id) {
-          e.favorited = !e.favorited;
-        }
-        return e;
-      })
-    );
-    setFavs(cards.filter((e) => e.favorited));
-  };
-
-  const handlePinCard = (id: number) => {
-    setCards(
-      cards.map((e) => {
-        if (e.id == id) {
-          e.pinned = !e.pinned;
-        }
-        return e;
-      })
-    );
-  };
+  const { cards, setCards } = useAuth();
 
   const generateRandomKey = (range: number, lastKey?: number): number => {
     const number = Math.floor(Math.random() * range);
@@ -79,33 +53,32 @@ const Home = () => {
   }, []);
 
   return (
-    <View style={styles.homeContainer}>
-      <FlatList
-        ListEmptyComponent={<HomeEmpty />}
-        ListHeaderComponent={<HomeHeader />}
-        style={{ flex: 1 }}
-        data={[
-          ...cards.filter((e) => e.pinned),
-          ...cards.filter((e) => !e.pinned),
-        ]}
-        keyExtractor={(item, index) => `${item.id}-${index}`}
-        renderItem={({ item }) => (
-          <>
-            <CardComponent
-              favorited={item.favorited}
-              pinned={item.pinned}
-              color={item.color}
-              title={item.titulo}
-              content={item.descricao}
-              date={new Date(item.dataCriacao).toLocaleString()}
-              handlePinPress={() => handlePinCard(item.id)}
-              handleFavoritePress={() => handleFavoriteCard(item.id)}
-              handleRemovePress={() => handleDeleteCard(item.id)}
-            />
-          </>
-        )}
-      />
-    </View>
+    <FlatList
+      ListEmptyComponent={<HomeEmpty />}
+      ListHeaderComponent={<HomeHeader />}
+      style={{ flex: 1 }}
+      data={[
+        ...cards.filter((e) => e.pinned),
+        ...cards.filter((e) => !e.pinned),
+      ]}
+      keyExtractor={(item, index) => `${item.id}-${index}`}
+      renderItem={({ item }) => (
+        <CardComponent
+          favorited={item.favorited}
+          pinned={item.pinned}
+          color={item.color}
+          title={item.titulo}
+          content={item.descricao}
+          date={new Date(item.dataCriacao).toLocaleString()}
+          editDisabled={true}
+          handlePinPress={() => handlePinCard(item.id, cards, setCards)}
+          handleFavoritePress={() =>
+            handleFavoriteCard(item.id, cards, setCards)
+          }
+          handleRemovePress={() => handleDeleteCard(item.id, cards, setCards)}
+        />
+      )}
+    />
   );
 };
 

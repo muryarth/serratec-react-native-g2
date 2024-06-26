@@ -1,31 +1,36 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  cardHeaderContainer: {
+  cardFooterContainer: {
     width: "100%",
-    justifyContent: "center",
     alignItems: "center",
+    height: 55,
+    gap: 5,
   },
 
-  cardHeaderTitle: {
-    paddingTop: 14,
-    paddingBottom: 4,
-    borderBottomColor: "#414141",
-    borderBottomWidth: 0.9,
+  cardFooterDateText: {
     textAlign: "center",
-    fontSize: 19,
-    color: "#414141",
-    width: "90%",
+    fontWeight: "500",
+    color: "#474747",
   },
 
-  cardHeaderAbsolute: {
+  cardFooterAbsolute: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
     position: "absolute",
     width: "100%",
     height: "100%",
   },
 
-  cardHeaderOffsetPressable: {
+  cardFooterOffest: {
+    flexDirection: "row",
     alignSelf: "flex-end",
+    top: 10,
+    left: 10,
+    gap: 5,
+  },
+
+  cardFooterPressable: {
     alignItems: "center",
     justifyContent: "center",
     borderColor: "black",
@@ -33,8 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     height: 28,
     width: 28,
-    top: -10,
-    right: -10,
     shadowColor: "#000",
     shadowOffset: {
       width: 5,

@@ -3,15 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 interface PressableIconProps {
-  disabled?: boolean;
   onPress: () => void;
   icon: IconDefinition;
+  disabled?: boolean;
+  visible?: boolean;
   size?: number;
   color?: string;
   style?: {};
 }
 
 const PressableIcon = ({
+  visible = true,
   disabled = false,
   color,
   size = 20,
@@ -20,9 +22,17 @@ const PressableIcon = ({
   onPress,
 }: PressableIconProps) => {
   return (
-    <TouchableOpacity style={style} onPress={onPress} disabled={disabled}>
-      <FontAwesomeIcon color={color} size={size} icon={icon} />
-    </TouchableOpacity>
+    <>
+      {visible && (
+        <TouchableOpacity style={style} onPress={onPress} disabled={disabled}>
+          <FontAwesomeIcon
+            color={disabled ? "gray" : color}
+            size={size}
+            icon={icon}
+          />
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 
