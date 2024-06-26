@@ -48,7 +48,8 @@ const AuthProvider = ({ children }: any) => {
       username,
       password,
       errorCallback ? errorCallback : () => console.log("Falha!"),
-      async () => {
+      async (id: number) => {
+        setUserId(id)
         await storeData({ username, userId });
         navigation.navigate("StackHome", { name: "StackHome" });
       }
@@ -77,7 +78,7 @@ const AuthProvider = ({ children }: any) => {
         const user = JSON.parse(value);
         setEmail(user.username);
         setUserId(user.userId);
-        console.log("Carregando usario: ", email, " ID: ", userId);
+        console.log("Carregando usario...");
         navigation.navigate("StackHome", { name: "StackHome" });
       }
     } catch (e) {
