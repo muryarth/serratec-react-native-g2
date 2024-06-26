@@ -1,14 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import React, { useState } from "react";
-import { Alert, Keyboard, View, Text } from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import Icon from "@expo/vector-icons/Ionicons";
+import { Text, SafeAreaView, Keyboard, View, Alert } from "react-native";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { styles } from "./style";
 import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { width } from "@fortawesome/free-solid-svg-icons/faAngleUp";
+import { validateEmail } from "../../services/Authentication";
 
 function UserCadastro() {
   const [username, setUsername] = useState<string>("");
@@ -20,28 +19,26 @@ function UserCadastro() {
   const placeholderColor = "#000";
 
   const [emailError, setEmailError] = useState<boolean>(false);
-  const [senhaError, setSenhaError] = useState<boolean>(false);
+  const [passwordError, setPasswordError] = useState<boolean>(false);
   const [confirmSenhaError, setConfirmSenhaError] = useState<boolean>(false);
 
   const handleEmail = (value: string) => {
+    setEmailError(false);
     setUsername(value);
   };
 
   const handleSenha = (value: string) => {
+    setPasswordError(false);
     setPassword(value);
   };
 
   const handleConfirmSenha = (value: string) => {
+    setConfirmSenhaError(false);
     setConfirmSenha(value);
   };
 
   const handleLogin = () => {
     navigator.navigate("StackLogin", { name: "Login" });
-  };
-
-  const validateEmail = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
   };
 
   const handleErrors = () => {
@@ -62,7 +59,7 @@ function UserCadastro() {
     }
 
     setEmailError(emailErr);
-    setSenhaError(senhaErr);
+    setPasswordError(senhaErr);
     setConfirmSenhaError(confirmSenhaErr);
 
     if (!emailErr && !senhaErr && !confirmSenhaErr) {
@@ -72,46 +69,46 @@ function UserCadastro() {
     }
   };
 
-  // const handleCadastro = async () => {
-  //   if (!handleErrors()) {
-  //     if (password !== confirmSenha) {
-  //       Alert.alert("Erro no cadastro", "Senhas não são iguais!");
-  //     } else {
-  //       try {
-  //         console.log("Tentando conexão com a API...");
-  //         const response = await axios.post(
-  //           "http://10.0.2.2:8080/login/cadastrar",
-  //           { username, password }
-  //         );
-  //         if (response.status === 200) {
-  //           Alert.alert("Cadastro realizado com sucesso!");
-  //           console.log("Cadastro realizado!");
-  //           navigator.navigate("StackLogin");
-  //         } else {
-  //           Alert.alert(
-  //             "Cadastro não realizado!",
-  //             response.data.message || "Aconteceu algum erro..."
-  //           );
-  //         }
-  //       } catch (error: any) {
-  //         if (error.response) {
-  //           if (error.response.status === 400) {
-  //             Alert.alert("Cadastro não realizado!", error.response.data);
-  //           }
-  //         } else {
-  //           Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
-  //           console.log("Erro na requisição!", error);
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
-
-  const handleCadastro = () => {
+  const handleCadastro = async () => {
     if (!handleErrors()) {
-      navigator.navigate("StackLogin", { name: "Login" });
+      if (password !== confirmSenha) {
+        Alert.alert("Erro no cadastro", "Senhas não são iguais!");
+      } else {
+        try {
+          console.log("Tentando conexão com a API...");
+          const response = await axios.post(
+            "http://10.0.2.2:8080/login/cadastrar",
+            { username, password }
+          );
+          if (response.status === 200) {
+            Alert.alert("Cadastro realizado com sucesso!");
+            console.log("Cadastro realizado!");
+            navigator.navigate("StackLogin", { name: "Login" });
+          } else {
+            Alert.alert(
+              "Cadastro não realizado!",
+              response.data.message || "Aconteceu algum erro..."
+            );
+          }
+        } catch (error: any) {
+          if (error.response) {
+            if (error.response.status === 400) {
+              Alert.alert("Cadastro não realizado!", error.response.data);
+            }
+          } else {
+            Alert.alert("Erro na requisição!", "Aconteceu um erro inesperado.");
+            console.log("Erro na requisição!", error);
+          }
+        }
+      }
     }
   };
+
+  // const handleCadastro = () => {
+  //   if (!handleErrors()) {
+  //     navigator.navigate("StackLogin", { name: "Login" });
+  //   }
+  // };
 
   return (
     <SafeAreaView
@@ -120,10 +117,13 @@ function UserCadastro() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.textinput}>
+          <View style={styles.containerIcon}>
             <Icon style={styles.icon} name="person-add-outline" size={120} />
             <Text style={styles.title}>CADASTRO</Text>
+          </View>
 
             <TextInputComponent
+              value={username}
               placeholder="Digite seu email"
               placeholderColor={placeholderColor}
               onChangeValue={handleEmail}
@@ -132,15 +132,17 @@ function UserCadastro() {
             />
 
             <TextInputComponent
+              value={password}
               placeholder="Digite sua senha"
               placeholderColor={placeholderColor}
               onChangeValue={handleSenha}
               type={true}
-              error={senhaError}
+              error={passwordError}
               errorText="Preencha a senha!"
             />
 
             <TextInputComponent
+              value={confirmSenha}
               placeholderColor={placeholderColor}
               placeholder="Confirmar senha"
               onChangeValue={handleConfirmSenha}

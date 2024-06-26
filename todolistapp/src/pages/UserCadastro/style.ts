@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 
+  containerIcon: {
+    alignItems: "center",
+    // backgroundColor: "black",
+  },
+
   icon: {
     marginTop: -60,
     color: "#ccc",
