@@ -63,7 +63,7 @@ const CardFooter = ({
             visible={editVisible}
             disabled={editDisabled}
             size={14}
-            color={"#000"}
+            color={"white"}
             icon={faPen}
             onPress={handleEditPress}
           />
@@ -72,7 +72,7 @@ const CardFooter = ({
             visible={favoriteVisible}
             disabled={favoriteDisabled}
             size={16}
-            color={favorited ? "orange" : "#000"}
+            color={favorited ? "orange" : "white"}
             icon={favorited ? faStarSolid : faStarRegular}
             onPress={handleFavoritePress}
           />
@@ -80,7 +80,7 @@ const CardFooter = ({
             style={styles.cardFooterPressable}
             visible={pinVisible}
             disabled={pinDisabled}
-            color={pinned ? "#5171a3" : "#000"}
+            color={pinned ? "#e908f5" : "white"}
             size={14}
             icon={faThumbtack}
             onPress={handlePinPress}

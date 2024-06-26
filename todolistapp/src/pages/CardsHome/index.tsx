@@ -1,50 +1,29 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { View, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList } from "react-native";
 import { HomeEmpty } from "./HomeEmpty";
 import { HomeHeader } from "./HomeHeader";
 import { Card as CardComponent } from "../../components/CardComponent";
-import { CardsList } from "../../@types";
 import { useAuth } from "../../hooks/useAuth";
 import {
   handleFavoriteCard,
   handleDeleteCard,
   handlePinCard,
+  setRandomCardColors,
 } from "../../services/CardController";
-import { styles } from "./style";
 
 const Home = () => {
   const { cards, setCards } = useAuth();
-
-  const generateRandomKey = (range: number, lastKey?: number): number => {
-    const number = Math.floor(Math.random() * range);
-    return number !== lastKey ? number : generateRandomKey(range, lastKey);
-  };
-
-  const setRandomCardColors = (cards: CardsList, colors: string[]) => {
-    let lastKey = colors.length;
-
-    setCards(
-      cards
-        .sort(
-          (a, b) =>
-            new Date(b.dataCriacao).getTime() -
-            new Date(a.dataCriacao).getTime()
-        )
-        .map((card) => {
-          const key = generateRandomKey(colors.length, lastKey);
-          lastKey = key;
-          card.color = colors[key];
-          return card;
-        })
-    );
-  };
 
   const getCards = async () => {
     axios
       .get("https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete")
       .then((response) =>
-        setRandomCardColors(response.data, ["#c6f5f5", "#dcfcfc"])
+        setRandomCardColors(response.data, setCards, [
+          "#c6f5f5",
+          "#b1ecec",
+          "#a7edec",
+        ])
       )
       .catch((error) => console.log(error));
   };
@@ -58,8 +37,20 @@ const Home = () => {
       ListEmptyComponent={<HomeEmpty />}
       ListHeaderComponent={<HomeHeader />}
       data={[
-        ...cards.filter((e) => e.pinned),
-        ...cards.filter((e) => !e.pinned),
+        ...cards
+          .filter((e) => e.pinned)
+          .sort(
+            (a, b) =>
+              new Date(b.dataCriacao).getTime() -
+              new Date(a.dataCriacao).getTime()
+          ),
+        ...cards
+          .filter((e) => !e.pinned)
+          .sort(
+            (a, b) =>
+              new Date(b.dataCriacao).getTime() -
+              new Date(a.dataCriacao).getTime()
+          ),
       ]}
       keyExtractor={(item, index) => `${item.id}-${index}`}
       renderItem={({ item }) => (

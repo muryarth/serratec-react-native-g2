@@ -23,4 +23,39 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+
+  cardDescriptionContainer: {
+    flex: 1,
+    width: "100%",
+    paddingHorizontal: 45,
+  },
+
+  cardDescriptionPlaceholderContainer: {
+    position: "absolute",
+    alignSelf: "center",
+    justifyContent: "center",
+    paddingTop: 5,
+  },
+
+  cardDescriptionPlaceholderText: {
+    color: "#2E2E2E",
+    fontSize: 15,
+    fontWeight: "400",
+  },
+
+  cardCreatorButtonsGroup: {
+    flexDirection: "row",
+    gap: 12,
+    marginBottom: 8,
+  },
+
+  cardCreatorButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 15,
+    height: 40,
+    width: 40,
+    borderRadius: 300,
+    borderWidth: 1.5,
+  },
 });

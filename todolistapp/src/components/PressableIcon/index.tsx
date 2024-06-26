@@ -26,7 +26,7 @@ const PressableIcon = ({
       {visible && (
         <TouchableOpacity style={style} onPress={onPress} disabled={disabled}>
           <FontAwesomeIcon
-            color={disabled ? "gray" : color}
+            color={disabled ? "#a2a2a2" : color}
             size={size}
             icon={icon}
           />

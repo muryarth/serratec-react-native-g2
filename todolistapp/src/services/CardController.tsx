@@ -1,6 +1,33 @@
 import { CardsList } from "../@types";
 import { deleteCard } from "./CardsHttpRequests";
 
+const generateRandomKey = (range: number, lastKey?: number): number => {
+  const number = Math.floor(Math.random() * range);
+  return number !== lastKey ? number : generateRandomKey(range, lastKey);
+};
+
+const setRandomCardColors = (
+  cards: CardsList,
+  setCards: (value: CardsList) => void,
+  colors: string[]
+) => {
+  let lastKey = colors.length;
+
+  setCards(
+    cards
+      .sort(
+        (a, b) =>
+          new Date(b.dataCriacao).getTime() - new Date(a.dataCriacao).getTime()
+      )
+      .map((card) => {
+        const key = generateRandomKey(colors.length, lastKey);
+        lastKey = key;
+        card.color = colors[key];
+        return card;
+      })
+  );
+};
+
 const handleDeleteCard = async (
   id: number,
   cards: CardsList,
@@ -41,4 +68,9 @@ const handlePinCard = (
   );
 };
 
-export { handleDeleteCard, handlePinCard, handleFavoriteCard };
+export {
+  handleDeleteCard,
+  handlePinCard,
+  handleFavoriteCard,
+  setRandomCardColors,
+};
