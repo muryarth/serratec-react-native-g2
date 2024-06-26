@@ -15,6 +15,7 @@ const CardCreator = () => {
   const [descricao, setDescricao] = useState("");
   const [modalComponent, setModalComponent] = useState(false);
   const { cards, setCards } = useAuth();
+  const { userId } = useAuth();
 
   const handleCancel = () => {
     setTitulo("");
@@ -33,7 +34,7 @@ const CardCreator = () => {
 
       await axios
         .post(
-          "https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete/",
+          (`http://10.0.2.2:8080/tarefa/${userId}`),
           data
         )
         .then((response) => {

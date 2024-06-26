@@ -14,10 +14,11 @@ import {
 
 const Home = () => {
   const { cards, setCards } = useAuth();
+  const { userId } = useAuth();
 
   const getCards = async () => {
     axios
-      .get("https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete")
+      .get(`http://10.0.2.2:8080/tarefa/${userId}/tarefas`)
       .then((response) =>
         setRandomCardColors(response.data, setCards, [
           "#c6f5f5",

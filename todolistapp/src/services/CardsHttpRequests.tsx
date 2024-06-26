@@ -6,7 +6,7 @@ const deleteCard = async (
   cards: CardsList
 ): Promise<CardsList> => {
   return axios
-    .delete(`https://667a29fb18a459f639528da9.mockapi.io/todo/lembrete/${id}`)
+    .delete(`http://10.0.2.2:8080/tarefa/${id}`)
     .then(() => cards.filter((card) => card.id !== id))
     .catch((error) => {
       throw new Error(error);
