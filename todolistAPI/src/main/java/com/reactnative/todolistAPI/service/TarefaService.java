@@ -57,7 +57,7 @@ public class TarefaService {
 
 		tarefaObj.setId(tarefaAlterar.getId());
 		tarefaObj.setDataModificacao(LocalDate.now());
-		tarefaObj.setDataCricao(tarefaTemp.getDataCricao());
+		tarefaObj.setDataCriacao(tarefaTemp.getDataCriacao());
 		tarefaObj.setAutor(tarefaTemp.getAutor());
 		tarefaObj.setTitulo(tarefaAlterar.getTitulo());
 		tarefaObj.setDescricao(tarefaAlterar.getDescricao());

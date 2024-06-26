@@ -46,7 +46,7 @@ public class UsuarioService {
 		Optional<Usuario> loginOpt = usuarioRepository.findByUsername(usuario.getUsername());
 		if (loginOpt.isPresent() && ((usuario.getPassword()).equals(loginOpt.get().getPassword()))) {
 			System.out.println("Login Realizado: " + usuario.getUsername());
-			return new LoginDTO(usuario.getId(), "Login com sucesso!");
+			return new LoginDTO(loginOpt.get().getId(), "Login com sucesso!");
 		}
 		return null;
 	}

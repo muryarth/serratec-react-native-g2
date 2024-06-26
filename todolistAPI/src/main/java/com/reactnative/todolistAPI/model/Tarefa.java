@@ -45,7 +45,7 @@ public class Tarefa {
 	@Column(name = "data_criacao")
 	@Temporal(TemporalType.DATE)
 	@Schema(description = "Data de criacao da tarefa")
-	private LocalDate dataCricao;
+	private LocalDate dataCriacao;
 
 	@Column(name = "data_modificacao")
 	@Temporal(TemporalType.DATE)
@@ -62,13 +62,13 @@ public class Tarefa {
 	public Tarefa() {
 	}
 
-	public Tarefa(Long id, String titulo, String descricao, LocalDate dataCricao, LocalDate dataModificacao,
+	public Tarefa(Long id, String titulo, String descricao, LocalDate dataCriacao, LocalDate dataModificacao,
 			Usuario autor) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
-		this.dataCricao = dataCricao;
+		this.dataCriacao = dataCriacao;
 		this.dataModificacao = dataModificacao;
 		this.autor = autor;
 	}
@@ -85,8 +85,8 @@ public class Tarefa {
 		return descricao;
 	}
 
-	public LocalDate getDataCricao() {
-		return dataCricao;
+	public LocalDate getDataCriacao() {
+		return dataCriacao;
 	}
 
 	public LocalDate getDataModificacao() {
@@ -109,8 +109,8 @@ public class Tarefa {
 		this.descricao = descricao;
 	}
 
-	public void setDataCricao(LocalDate dataCricao) {
-		this.dataCricao = dataCricao;
+	public void setDataCriacao(LocalDate dataCriacao) {
+		this.dataCriacao = dataCriacao;
 	}
 
 	public void setDataModificacao(LocalDate dataModificacao) {

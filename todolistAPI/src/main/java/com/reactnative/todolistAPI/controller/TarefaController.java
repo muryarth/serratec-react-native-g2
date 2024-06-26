@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reactnative.todolistAPI.model.Tarefa;
+import com.reactnative.todolistAPI.model.Usuario;
 import com.reactnative.todolistAPI.repository.TarefaRepository;
 import com.reactnative.todolistAPI.service.TarefaService;
 
@@ -46,14 +47,17 @@ public class TarefaController {
 		return ResponseEntity.ok(tarefaOpt.get());
 	}
 	
-    @GetMapping("{id}/tarefas")
-    public List<Tarefa> buscarPorAutor(@PathVariable Long autorId) {
-        return tarefaService.getTarefasByAutorId(autorId);
+    @GetMapping("/{userId}/tarefas")
+    public List<Tarefa> buscarPorAutor(@PathVariable Long userId) {
+        return tarefaService.getTarefasByAutorId(userId);
     }
 	
-	@PostMapping
+	@PostMapping("/{userId}")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Tarefa> inserir(@Valid @RequestBody Tarefa tarefa) {
+	public ResponseEntity<Tarefa> inserir(@RequestBody Tarefa tarefa, @PathVariable Long userId) {
+		Usuario usuarioObj = new Usuario();
+		usuarioObj.setId(userId);
+		tarefa.setAutor(usuarioObj);
 		tarefaService.insert(tarefa);
 		return ResponseEntity.ok(tarefa);
 	}

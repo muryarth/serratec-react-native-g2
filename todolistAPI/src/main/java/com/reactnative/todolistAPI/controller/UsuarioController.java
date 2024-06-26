@@ -31,6 +31,7 @@ public class UsuarioController {
 	public ResponseEntity<LoginDTO> login(@RequestBody Usuario usuario) {
 		LoginDTO loginDTO = usuarioService.verifyLogin(usuario);
 		if (loginDTO != null) {
+			System.out.println("ID Login: " + loginDTO.getUsuarioId());
 			return ResponseEntity.ok(loginDTO);
 		} else {
 			System.out.println("Cadastro não encontrado: " + usuario.getUsername());
