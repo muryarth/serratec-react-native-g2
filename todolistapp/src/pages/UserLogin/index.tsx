@@ -8,7 +8,7 @@ import { styles } from "./style";
 import { TextInputComponent } from "../../components/TextInputComponent";
 import { DefaultAppButton } from "../../components/DefaultAppButton";
 import { useAuth } from "../../hooks/useAuth";
-import { validateEmail } from "../../services/Auth";
+import { validateEmail } from "../../services/Authentication";
 
 const UserLogin = () => {
   // const [username, setUsername] = useState<string>();

@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { createContext, useContext, useEffect, useState } from "react";
-import { validateUser } from "../services/Auth";
+import { validateUser } from "../services/Authentication";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardsList } from "../@types";
 
