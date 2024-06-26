@@ -5,8 +5,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CardsList } from "../@types";
 
 export type ContextDataType = {
-  favs: CardsList;
-  setFavs: (value: CardsList) => void;
   email: string;
   setEmail: (value: string) => void;
   password: string;
@@ -27,12 +25,10 @@ const Context = createContext<ContextDataType>({
   setEmail: () => {},
   password: "",
   setPassword: () => {},
-  userId: 0,
-  setUserId: () => {},
-  favs: [],
-  setFavs: () => {},
   cards: [],
   setCards: () => {},
+  userId: 0,
+  setUserId: () => {},
   loginAuth: () => {},
 });
 
@@ -41,7 +37,6 @@ const AuthProvider = ({ children }: any) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [userId, setUserId] = useState<number>(0);
-  const [favs, setFavs] = useState<CardsList>([]);
   const [cards, setCards] = useState<CardsList>([]);
 
   const loginAuth = (
@@ -101,8 +96,6 @@ const AuthProvider = ({ children }: any) => {
         setEmail,
         password,
         setPassword,
-        favs,
-        setFavs,
         cards,
         setCards,
         userId,

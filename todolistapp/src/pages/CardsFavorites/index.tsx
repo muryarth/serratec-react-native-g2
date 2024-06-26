@@ -1,17 +1,21 @@
-import { FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { useAuth } from "../../hooks/useAuth";
 import { Card as CardComponent } from "../../components/CardComponent";
 import {
   handleFavoriteCard,
   handleDeleteCard,
 } from "../../services/CardController";
+import { styles } from "./styles";
+import { FavoritesEmpty } from "./FavoritesEmpty";
+import { FavoritesHeader } from "./FavoritesHeader";
 
 const CardsFavorites = () => {
   const { cards, setCards } = useAuth();
 
   return (
     <FlatList
-      // style={{ flex: 1 }}
+      ListEmptyComponent={<FavoritesEmpty />}
+      ListHeaderComponent={<FavoritesHeader />}
       data={[...cards.filter((e) => e.favorited)]}
       keyExtractor={(item, index) => `${item.id}-${index}`}
       renderItem={({ item }) => (

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import { HomeEmpty } from "./HomeEmpty";
 import { HomeHeader } from "./HomeHeader";
 import { Card as CardComponent } from "../../components/CardComponent";
@@ -11,6 +11,7 @@ import {
   handleDeleteCard,
   handlePinCard,
 } from "../../services/CardController";
+import { styles } from "./style";
 
 const Home = () => {
   const { cards, setCards } = useAuth();
@@ -56,7 +57,6 @@ const Home = () => {
     <FlatList
       ListEmptyComponent={<HomeEmpty />}
       ListHeaderComponent={<HomeHeader />}
-      style={{ flex: 1 }}
       data={[
         ...cards.filter((e) => e.pinned),
         ...cards.filter((e) => !e.pinned),
